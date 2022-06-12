@@ -1,1 +1,1 @@
-print(Bem Vindo ao WebTails!!!)
+print("Bem Vindo ao WebTails!!!")
