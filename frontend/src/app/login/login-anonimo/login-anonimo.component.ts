@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-anonimo',
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginAnonimoComponent implements OnInit {
 
-  constructor() {
+  nickname = '';
+
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+  }
+
+  entrar(){
+    console.log('nickname ...', this.nickname);
+    this.router.navigateByUrl('chat');
   }
 
 }
