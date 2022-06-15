@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-login-anonimo',
@@ -9,8 +11,9 @@ import { Router } from '@angular/router';
 export class LoginAnonimoComponent implements OnInit {
 
   nickname = '';
+  usuarios: Usuario[] = [];
 
-  constructor(private router: Router) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -18,7 +21,24 @@ export class LoginAnonimoComponent implements OnInit {
 
   entrar(){
     console.log('nickname ...', this.nickname);
-    this.router.navigateByUrl('chat');
+    console.log('usuarios ...',this.usuarios);
+
+    const resposta = this.loginService.loginAnonimo().subscribe((usuarios: Usuario[]) => {
+      this.usuarios = usuarios;
+    });
+    console.log('usuarios ...',this.usuarios);
+    this.validaNickaname();
+  }
+
+
+  validaNickaname(){
+    const result = this.usuarios.find(user => user.nickname === this.nickname);
+
+    if(result != null){
+      alert('usuario ja existe')
+    }else{
+     // this.router.navigateByUrl('chat');
+    }
   }
 
 }
